@@ -2,8 +2,8 @@ import { createStore } from 'redux';
 
 import rootReducer from './rootReducer';
 
-export default function configureStore() {
-  const store = createStore(rootReducer);
+export default function configureStore(initialState) {
+  const store = createStore(rootReducer, initialState);
 
   if (module.hot) {
     module.hot.accept('./rootReducer', () =>

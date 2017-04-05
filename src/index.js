@@ -1,26 +1,31 @@
-import { AppContainer } from 'react-hot-loader';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-
-import App from './components/App';
+import { render } from 'react-dom';
+import { hashHistory } from 'react-router';
+import { AppContainer } from 'react-hot-loader';
+import { syncHistoryWithStore } from 'react-router-redux'
+import Root from './components/Root';
 import configureStore from './store';
+import routes from './routes';
 
 const store = configureStore();
-
+const history = syncHistoryWithStore(hashHistory, store);
 const rootEl = document.getElementById('root');
-const render = Component =>
-  ReactDOM.render(
-    <Provider store={store}>
-      <AppContainer>
-        <Component />
-      </AppContainer>
-    </Provider>,
-    rootEl
-  );
 
-render(App);
+
+const renderApp = appRoutes => {
+    render(
+      <AppContainer>
+        <Root store={store} history={history} routes={appRoutes} />
+      </AppContainer>,
+      rootEl
+    )
+};
+
+renderApp(routes);
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => render(App));
+  module.hot.accept('./routes', () => {
+    const newRoutes = require('./routes').default;
+    renderApp(newRoutes);
+  });
 }
