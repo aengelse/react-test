@@ -1,7 +1,7 @@
 import mockData from './mockData'
 
 const defaultState = {
-  navigationItems: mockData
+  sections: mockData
 };
 
 export default function navigation(state = defaultState, action) {

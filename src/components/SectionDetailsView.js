@@ -4,17 +4,17 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FlatButton from 'material-ui/FlatButton';
 import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-backspace';
 
-const SectionDetailsView = ({ params, navigationItems }) => {
-  const currentItem = navigationItems.filter( item => item.path === ('/' + params.id))[0];
+const SectionDetailsView = ({ params, sections }) => {
+  const selectedSection = sections.filter( item => item.path === ('/' + params.id))[0];
   const columnStyle = { width: '200px' };
 
-  if (!currentItem) {
-    return (<div>Geen navigatie items gevonden.</div>);
+  if (!selectedSection) {
+    return (<div>Geen navigatie voor gekozen sectie gevonden.</div>);
   }
 
   return (
     <div>
-      <h1 className="mdc-typography--title">{ currentItem.path }</h1>
+      <h1 className="mdc-typography--title">{ selectedSection.path }</h1>
       <Table>
         <TableHeader>
           <TableRow>
@@ -28,7 +28,7 @@ const SectionDetailsView = ({ params, navigationItems }) => {
         </TableHeader>
         <TableBody showRowHover={true}>
 
-          { currentItem.items.map( (item, count) => (
+          { selectedSection.items.map( (item, count) => (
             <TableRow key={count}>
               <TableRowColumn style={columnStyle}>
                 { item.name }
@@ -52,7 +52,7 @@ const SectionDetailsView = ({ params, navigationItems }) => {
 };
 
 SectionDetailsView.propTypes = {
-  navigationItems: PropTypes.array.isRequired,
+  sections: PropTypes.array.isRequired,
   params: PropTypes.object
 };
 
