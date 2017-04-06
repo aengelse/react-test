@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { List, ListItem } from 'material-ui/List';
 import { lightBlueA700 } from 'material-ui/styles/colors';
 
-const NavigationOverview = ({ navigationItems }) => {
+const SectionsOverview = ({ navigationItems }) => {
   const listItemStyle = { color: lightBlueA700 };
 
   return (
@@ -22,8 +22,8 @@ const NavigationOverview = ({ navigationItems }) => {
   );
 };
 
-NavigationOverview.propTypes = {
+SectionsOverview.propTypes = {
   navigationItems: PropTypes.array.isRequired
 };
 
-export default NavigationOverview;
+export default SectionsOverview;

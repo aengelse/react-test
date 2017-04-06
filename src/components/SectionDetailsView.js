@@ -4,7 +4,7 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FlatButton from 'material-ui/FlatButton';
 import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-backspace';
 
-const NavigationItemOverview = ({ params, navigationItems }) => {
+const SectionDetailsView = ({ params, navigationItems }) => {
   const currentItem = navigationItems.filter( item => item.path === ('/' + params.id))[0];
   const columnStyle = { width: '200px' };
 
@@ -51,9 +51,9 @@ const NavigationItemOverview = ({ params, navigationItems }) => {
   );
 };
 
-NavigationItemOverview.propTypes = {
+SectionDetailsView.propTypes = {
   navigationItems: PropTypes.array.isRequired,
   params: PropTypes.object
 };
 
-export default NavigationItemOverview;
+export default SectionDetailsView;
