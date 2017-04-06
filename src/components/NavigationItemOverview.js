@@ -1,40 +1,59 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import FlatButton from 'material-ui/FlatButton';
+import KeyboardBackspace from 'material-ui/svg-icons/hardware/keyboard-backspace';
 
-class NavigationItemOverview extends Component {
-  render() {
-    const { params, navigationItems } = this.props;
-    const currentItem = navigationItems.filter( item => item.path === ('/' + params.id))[0];
+const NavigationItemOverview = ({ params, navigationItems }) => {
+  const currentItem = navigationItems.filter( item => item.path === ('/' + params.id))[0];
+  const columnStyle = { width: '200px' };
 
-    if (!currentItem) {
-      return ( <div>Geen items gevonden.</div>);
-    }
-
-    return (
-      <div>
-        <h1 className="mdc-typography--title">{currentItem.path}</h1>
-        <ul className="mdc-list mdc-list--two-line">
-          { currentItem.items.map( (item, count) => (
-            <li className="mdc-list-item" key={count}>
-              <span className="mdc-list-item__text">
-                <span className="mdc-list-item__text__primary">{ item.name }</span>
-                <span className="mdc-list-item__text__secondary">{ item.url }</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
+  if (!currentItem) {
+    return (<div>Geen navigatie items gevonden.</div>);
   }
-}
+
+  return (
+    <div>
+      <h1 className="mdc-typography--title">{ currentItem.path }</h1>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderColumn style={columnStyle}>
+              Navigatie item
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+              Url
+            </TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody showRowHover={true}>
+
+          { currentItem.items.map( (item, count) => (
+            <TableRow key={count}>
+              <TableRowColumn style={columnStyle}>
+                { item.name }
+              </TableRowColumn>
+
+              <TableRowColumn>
+              { item.url }
+              </TableRowColumn>
+            </TableRow>
+          ))}
+
+        </TableBody>
+      </Table>
+
+      <br />
+      <Link to="/">
+        <FlatButton label="Terug naar overzicht" icon={<KeyboardBackspace/>} />
+      </Link>
+    </div>
+  );
+};
 
 NavigationItemOverview.propTypes = {
   navigationItems: PropTypes.array.isRequired,
   params: PropTypes.object
 };
 
-const mapStateToProps = (state) => {
-  return state.navigation;
-};
-
-export default connect(mapStateToProps)(NavigationItemOverview);
+export default NavigationItemOverview;
