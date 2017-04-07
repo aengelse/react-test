@@ -11,7 +11,6 @@ const store = configureStore();
 const history = syncHistoryWithStore(hashHistory, store);
 const rootEl = document.getElementById('root');
 
-
 const renderApp = appRoutes => {
     render(
       <AppContainer>

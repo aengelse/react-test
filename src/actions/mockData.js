@@ -1,7 +1,10 @@
-const data = [
-  {
-    path: '/desktops',
-    items: [
+export const sectionsData = [
+  '/desktops', '/home-cinema-sets'
+];
+
+export const selectedSectionDetails = {
+  'desktops' : {
+    navigation: [
       {
         name: 'Alle desktops',
         url: 'https://www.coolblue.nl/desktops'
@@ -12,9 +15,8 @@ const data = [
       }
     ]
   },
-  {
-    path: '/home-cinema-sets',
-    items: [
+  'home-cinema-sets' : {
+    navigation: [
       {
         name: 'Alle home cinema sets',
         url: 'https://www.coolblue.nl/home-cinema-sets'
@@ -29,6 +31,4 @@ const data = [
       }
     ]
   }
-];
-
-export default data;
+};
